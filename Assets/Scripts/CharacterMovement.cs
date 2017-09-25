@@ -6,12 +6,24 @@ public class CharacterMovement : MonoBehaviour {
 	#region Variables
 	#region Movement Variables
 	public float maxSpeed;
+	#endregion
+	#region Jump Variables
+	bool grounded = false;
+	static float groundCheckRadius = 0.2f;
+
+	public LayerMask groundLayer;
+	public Transform groundCheck;
+	public float jumpHeight; 
+	#endregion
+
+	#region Roll Variables
+	bool rolling = false;
+	#endregion
 
 	private Rigidbody2D character;
 	private Animator animator;
 	private bool facingRight;
 
-	#endregion
 	#endregion
 
 	// Use this for initialization
@@ -20,11 +32,26 @@ public class CharacterMovement : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		facingRight = true;
 	}
-	
+
+	void Update ()
+	{
+		if( grounded && Input.GetAxis("Jump") > 0 ) {
+			grounded = false;
+			animator.SetBool( "isOnTheGround", grounded );
+			character.AddForce(new Vector2( 0, jumpHeight ) );
+		}
+	}
+
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
-		
+		//check if we are in the ground - if no, then we are falling
+		grounded = Physics2D.OverlapCircle( groundCheck.position, groundCheckRadius, groundLayer );
+		animator.SetBool( "isOnTheGround", grounded );
+
+		rolling = Input.GetKey( KeyCode.S );
+		animator.SetBool( "roll", rolling );
+
 		float move = Input.GetAxis ("Horizontal");
 		character.velocity = new Vector2( move*maxSpeed, character.velocity.y );
 		animator.SetFloat("speed", Mathf.Abs(move) );

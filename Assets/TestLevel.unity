@@ -347,6 +347,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114414527024796482, guid: 47532469a07181d4c983cdcde74b7e7f,
+        type: 2}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 353452599}
+    - target: {fileID: 114414527024796482, guid: 47532469a07181d4c983cdcde74b7e7f,
+        type: 2}
+      propertyPath: groundLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 114414527024796482, guid: 47532469a07181d4c983cdcde74b7e7f,
+        type: 2}
+      propertyPath: jumpHeight
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47532469a07181d4c983cdcde74b7e7f, type: 2}
   m_IsPrefabParent: 0
