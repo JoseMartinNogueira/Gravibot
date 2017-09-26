@@ -20,7 +20,7 @@
 			"contents": "using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;\n\npublic class NewBehaviourScript : MonoBehaviour {\n\n\t// Use this for initialization\n\tvoid Start () {\n\t\t\n\t}\n\t\n\t// Update is called once per frame\n\tvoid Update () {\n\t\t\n\t}\n}\n",
 			"file": "Assets/Scripts/NewBehaviourScript.cs",
 			"file_size": 253,
-			"file_write_time": 131504937711894604,
+			"file_write_time": 131505088106528792,
 			"settings":
 			{
 				"buffer_size": 250,

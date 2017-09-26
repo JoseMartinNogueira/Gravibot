@@ -15,11 +15,13 @@ public class CharacterMovement : MonoBehaviour {
 	public Transform groundCheck;
 	public float jumpHeight; 
 	#endregion
+	#region Shooting Variables
+	public Transform gunTip;
+	public GameObject bullet;
+	float fireRate = 0.5f;
+	float nextFire = 0f;
 
-	#region Roll Variables
-	bool rolling = false;
 	#endregion
-
 	private Rigidbody2D character;
 	private Animator animator;
 	private bool facingRight;
@@ -35,23 +37,29 @@ public class CharacterMovement : MonoBehaviour {
 
 	void Update ()
 	{
-		if( grounded && Input.GetAxis("Jump") > 0 ) {
+		if (grounded && Input.GetAxis ("Jump") > 0) {
 			grounded = false;
-			animator.SetBool( "isOnTheGround", grounded );
-			character.AddForce(new Vector2( 0, jumpHeight ) );
+			animator.SetBool ("isOnTheGround", grounded);
+			character.AddForce (new Vector2 (0, jumpHeight));
+		}
+
+		if (Input.GetKey (KeyCode.C)) {
+			fireBullet();
 		}
 	}
 
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
-		//check if we are in the ground - if no, then we are falling
-		grounded = Physics2D.OverlapCircle( groundCheck.position, groundCheckRadius, groundLayer );
-		animator.SetBool( "isOnTheGround", grounded );
+		groundChecker();
 
-		rolling = Input.GetKey( KeyCode.S );
-		animator.SetBool( "roll", rolling );
+		movementFunction();
 
+
+	}
+
+	void movementFunction ()
+	{
 		float move = Input.GetAxis ("Horizontal");
 		character.velocity = new Vector2( move*maxSpeed, character.velocity.y );
 		animator.SetFloat("speed", Mathf.Abs(move) );
@@ -61,7 +69,6 @@ public class CharacterMovement : MonoBehaviour {
 		} else if( move < 0.0 && facingRight ) {
 			flip();
 		}
-		 
 	}
 
 	void flip ()
@@ -77,5 +84,23 @@ public class CharacterMovement : MonoBehaviour {
 			nPos.x += 0.2f;
 		}
 		transform.localPosition = nPos;
+	}
+
+	void groundChecker()
+	{
+		//check if we are in the ground - if no, then we are falling
+		grounded = Physics2D.OverlapCircle( groundCheck.position, groundCheckRadius, groundLayer );
+		animator.SetBool( "isOnTheGround", grounded );
+
+	}
+
+	void fireBullet ()
+	{
+		if (Time.time > nextFire) {
+			nextFire = Time.time + fireRate;
+			if (facingRight) {
+				Instantiate(bullet, gunTip.position, Quaternion.Euler( new Vector3(0,0,0) ) );
+			}
+		}
 	}
 }

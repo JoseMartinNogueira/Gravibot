@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class DestroyBullet : MonoBehaviour {
 
+	public float aliveTime;
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+		Destroy( gameObject, aliveTime );
 	}
 	
 	// Update is called once per frame
