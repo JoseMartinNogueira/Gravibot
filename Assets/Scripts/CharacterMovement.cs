@@ -6,6 +6,7 @@ public class CharacterMovement : MonoBehaviour {
 	#region Variables
 	#region Movement Variables
 	public float maxSpeed;
+
 	#endregion
 	#region Jump Variables
 	bool grounded = false;
@@ -18,7 +19,24 @@ public class CharacterMovement : MonoBehaviour {
 	#region Shooting Variables
 	public Transform gunTip;
 	public GameObject bullet;
-	float fireRate = 0.5f;
+	public GameObject gravityGun;
+	public GameObject copyGun;
+
+	Vector3 leftShootingCorrection = new Vector3(0,0.1f,0);
+	Vector3 rightShootingCorrection = new Vector3(0,0.05f,0);
+
+	private enum AmmunitionType 
+	{
+		BULLET,
+		GRAVITY,
+		COPY,
+	};
+
+	AmmunitionType ammunition;
+	GameObject ammu;
+	float fireRateBullet = 0.1f;
+	float fireRateGravityGun = 0.5f;
+	float fireRateCopyGun = 1f;
 	float nextFire = 0f;
 
 	#endregion
@@ -33,6 +51,7 @@ public class CharacterMovement : MonoBehaviour {
 		character = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		facingRight = true;
+		ammunition = AmmunitionType.BULLET;
 	}
 
 	void Update ()
@@ -42,10 +61,17 @@ public class CharacterMovement : MonoBehaviour {
 			animator.SetBool ("isOnTheGround", grounded);
 			character.AddForce (new Vector2 (0, jumpHeight));
 		}
-
-		if (Input.GetKey (KeyCode.C)) {
-			fireBullet();
+		if (Input.GetKey (KeyCode.Alpha1)) {
+			ammunition = AmmunitionType.BULLET;
+		} else if (Input.GetKey (KeyCode.Alpha2)) {
+			ammunition = AmmunitionType.GRAVITY;
+		} else if (Input.GetKey (KeyCode.Alpha3)) {
+			ammunition = AmmunitionType.COPY;
 		}
+		if (Input.GetAxis ("Fire1") > 0) {
+			fire(ammunition);
+		}
+			 
 	}
 
 	// Update is called once per frame
@@ -63,12 +89,14 @@ public class CharacterMovement : MonoBehaviour {
 		float move = Input.GetAxis ("Horizontal");
 		character.velocity = new Vector2( move*maxSpeed, character.velocity.y );
 		animator.SetFloat("speed", Mathf.Abs(move) );
-
-		if( move > 0.0 && !facingRight ) {
+		float mouse = Input.GetAxis ("Mouse X");
+		if( mouse > 0.0 && !facingRight ) {
 			flip();
-		} else if( move < 0.0 && facingRight ) {
+		} else if( mouse < 0.0  && facingRight ) {
 			flip();
 		}
+
+
 	}
 
 	void flip ()
@@ -94,12 +122,30 @@ public class CharacterMovement : MonoBehaviour {
 
 	}
 
-	void fireBullet ()
+	void fire (AmmunitionType ammType)
 	{
+		
+		float fireRate = 0;
+		switch (ammType) {
+		case AmmunitionType.BULLET:
+			ammu = bullet;
+			fireRate = fireRateBullet;
+			break;
+		case AmmunitionType.GRAVITY:
+			ammu = gravityGun;
+			fireRate = fireRateGravityGun;
+			break;
+		case AmmunitionType.COPY:
+			ammu = copyGun;
+			fireRate = fireRateCopyGun;
+			break;
+		}
 		if (Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
 			if (facingRight) {
-				Instantiate(bullet, gunTip.position, Quaternion.Euler( new Vector3(0,0,0) ) );
+				Instantiate (ammu, gunTip.position + rightShootingCorrection, Quaternion.Euler (new Vector3 (0, 0, 0)));
+			} else {
+				Instantiate (ammu, gunTip.position-leftShootingCorrection, Quaternion.Euler (new Vector3 (0, 0, 180f)));
 			}
 		}
 	}
