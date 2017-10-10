@@ -15,26 +15,29 @@ public class CharacterMovement : MonoBehaviour {
 	public LayerMask groundLayer;
 	public Transform groundCheck;
 	public float jumpHeight; 
+	private bool doubleJump;
 	#endregion
 	#region Shooting Variables
 	public Transform gunTip;
-	public GameObject bullet;
+	public GameObject horizontalGun;
+	public GameObject horizontalLeftGun;
 	public GameObject gravityGun;
-	public GameObject copyGun;
+	public GameObject gravityActiveGun;
+	public GameObject verticalGun;
+	public GameObject verticalDownGun;
 
 	Vector3 leftShootingCorrection = new Vector3(0,0.1f,0);
 	Vector3 rightShootingCorrection = new Vector3(0,0.05f,0);
 
 	private enum AmmunitionType 
 	{
-		BULLET,
+		VERTICAL,
 		GRAVITY,
-		COPY,
+		HORIZONTAL,
 	};
 
 	AmmunitionType ammunition;
 	GameObject ammu;
-	float fireRateBullet = 0.1f;
 	float fireRateGravityGun = 0.5f;
 	float fireRateCopyGun = 1f;
 	float nextFire = 0f;
@@ -51,25 +54,37 @@ public class CharacterMovement : MonoBehaviour {
 		character = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		facingRight = true;
-		ammunition = AmmunitionType.BULLET;
+		ammunition = AmmunitionType.HORIZONTAL;
 	}
 
 	void Update ()
 	{
-		if (grounded && Input.GetAxis ("Jump") > 0) {
-			grounded = false;
-			animator.SetBool ("isOnTheGround", grounded);
-			character.AddForce (new Vector2 (0, jumpHeight));
+		if (Input.GetKey (KeyCode.Space)) {
+			if (grounded) {
+				grounded = false;
+				animator.SetBool ("isOnTheGround", grounded);
+				character.AddForce (new Vector2 (0, jumpHeight));
+				doubleJump = true;
+			} else {
+				if (doubleJump) {
+					//character.velocity = new Vector2( character.velocity.x, 0 );
+					character.AddForce (new Vector2 (0, jumpHeight));
+					doubleJump = false;
+				}
+			}
 		}
 		if (Input.GetKey (KeyCode.Alpha1)) {
-			ammunition = AmmunitionType.BULLET;
+			ammunition = AmmunitionType.HORIZONTAL;
 		} else if (Input.GetKey (KeyCode.Alpha2)) {
-			ammunition = AmmunitionType.GRAVITY;
+			ammunition = AmmunitionType.VERTICAL;
 		} else if (Input.GetKey (KeyCode.Alpha3)) {
-			ammunition = AmmunitionType.COPY;
+			ammunition = AmmunitionType.GRAVITY;
 		}
 		if (Input.GetAxis ("Fire1") > 0) {
-			fire(ammunition);
+			fire (ammunition, 1);
+		}
+		if (Input.GetAxis ("Fire2") > 0) {
+			fire( ammunition, 2);
 		}
 			 
 	}
@@ -90,9 +105,10 @@ public class CharacterMovement : MonoBehaviour {
 		character.velocity = new Vector2( move*maxSpeed, character.velocity.y );
 		animator.SetFloat("speed", Mathf.Abs(move) );
 		float mouse = Input.GetAxis ("Mouse X");
-		if( mouse > 0.0 && !facingRight ) {
+		//float xCharacter = character.transform.localPosition.x;
+		if( mouse > 0.2 && !facingRight ) {
 			flip();
-		} else if( mouse < 0.0  && facingRight ) {
+		} else if( mouse < -0.2  && facingRight ) {
 			flip();
 		}
 
@@ -122,21 +138,21 @@ public class CharacterMovement : MonoBehaviour {
 
 	}
 
-	void fire (AmmunitionType ammType)
+	void fire (AmmunitionType ammType, int button)
 	{
 		
 		float fireRate = 0;
 		switch (ammType) {
-		case AmmunitionType.BULLET:
-			ammu = bullet;
-			fireRate = fireRateBullet;
+		case AmmunitionType.VERTICAL:
+			ammu = ( button == 1)? verticalGun : verticalDownGun;
+			fireRate = fireRateCopyGun;
 			break;
 		case AmmunitionType.GRAVITY:
-			ammu = gravityGun;
+			ammu = (button == 1 )? gravityGun : gravityActiveGun;
 			fireRate = fireRateGravityGun;
 			break;
-		case AmmunitionType.COPY:
-			ammu = copyGun;
+		case AmmunitionType.HORIZONTAL:
+			ammu = (button == 1 )? horizontalGun : horizontalLeftGun;
 			fireRate = fireRateCopyGun;
 			break;
 		}

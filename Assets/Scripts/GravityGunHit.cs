@@ -15,8 +15,10 @@ public class GravityGunHit : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		target = other;
-		once = true;
+		if (other.gameObject.tag != "Player") {
+			once = true;
+			target = other;
+		}
 	}
 
 	void OnTriggerStay2D (Collider2D other)
@@ -27,18 +29,11 @@ public class GravityGunHit : MonoBehaviour {
 	void Update ()
 	{
 		if (once) {
-			bulletController.removeForce();
+			bulletController.removeForce ();
 			Rigidbody2D collider = target.GetComponent<Rigidbody2D> ();
-			if (target.gameObject.tag == "Object" ) {
-				if (collider.gravityScale == 0) {
-					collider.gravityScale = 1;
-					collider.freezeRotation = false;
-					collider.constraints = RigidbodyConstraints2D.None;
-				} else {
-					collider.gravityScale = 0;
-					collider.freezeRotation = true;
-					collider.constraints = RigidbodyConstraints2D.FreezeAll;
-				}
+			if (target.gameObject.tag == "Object") {
+				collider.isKinematic = true;
+				collider.velocity = new Vector2 (0, 0);
 			}
 			once = false;
 			Destroy(gameObject);
