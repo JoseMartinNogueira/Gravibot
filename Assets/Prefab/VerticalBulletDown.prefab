@@ -119,6 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570d81e3c36ab654b8bc865599b7d3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletController: {fileID: 0}
+  once: 0
+  target: {fileID: 0}
+  bulletHit: 0
+  moveSpeedAplyed: -1
 --- !u!114 &114716723506321636
 MonoBehaviour:
   m_ObjectHideFlags: 1

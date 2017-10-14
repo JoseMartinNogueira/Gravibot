@@ -2,41 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityGunHit : MonoBehaviour {
+public class GravityGunHit : BulletHit {
 
-	BulletController bulletController;
-	Collider2D target;
-	bool once;
-	void Awake () 
+	public override void hitManager ()
 	{
-		bulletController = GetComponent<BulletController>();
-
-	}
-
-	void OnTriggerEnter2D (Collider2D other)
-	{
-		if (other.gameObject.tag != "Player") {
-			once = true;
-			target = other;
+		bulletController.removeForce ();
+		Rigidbody2D collider = target.GetComponent<Rigidbody2D> ();
+		if (target.gameObject.tag == "Object" || target.gameObject.tag == "Bullet" ) {
+			collider.isKinematic = true;
+			specificMovement( collider );
 		}
-	}
-
-	void OnTriggerStay2D (Collider2D other)
-	{
-	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-		if (once) {
-			bulletController.removeForce ();
-			Rigidbody2D collider = target.GetComponent<Rigidbody2D> ();
-			if (target.gameObject.tag == "Object") {
-				collider.isKinematic = true;
-				collider.velocity = new Vector2 (0, 0);
-			}
-			once = false;
+		once = false;
+		if (target.gameObject.tag != "Bullet") {
 			Destroy(gameObject);
 		}
 	}
+	public override bool allawedMove (BoxCollition bc)
+	{
+		return true;
+	} 
+	public override void specificMovement (Rigidbody2D collider )
+	{
+		collider.velocity = new Vector2 (0, 0);
+	}
 }
+

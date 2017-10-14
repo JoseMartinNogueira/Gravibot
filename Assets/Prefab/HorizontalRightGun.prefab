@@ -143,6 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 951aefafa0cbbfd428c2816ec7ff6fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletController: {fileID: 0}
+  once: 0
+  target: {fileID: 0}
+  bulletHit: 0
+  moveSpeedAplyed: 1
 --- !u!212 &212465488913166748
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -2,49 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HorizontalGunLeftHit : MonoBehaviour {
+public class HorizontalGunLeftHit : BulletHit {
 
-	BulletController bulletController;
-	bool once;
-	Collider2D target;
-
-	void Awake () 
+	public float moveSpeedAplyed;
+	public override void hitManager ()
 	{
-		bulletController = GetComponent<BulletController>();
+		movementBullets();
 	}
 
-	void OnTriggerEnter2D (Collider2D other)
+	public override bool allawedMove (BoxCollition bc)
 	{
-		if (other.gameObject.tag != "Player") {
-			once = true;
-			target = other;
-		}
+		return !bc.isOnALeftWall();
 	}
 
-	void OnTriggerStay2D (Collider2D other)
+	public override void specificMovement (Rigidbody2D collider )
 	{
-
-	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-		if (once) {
-			bulletController.removeForce ();
-			Rigidbody2D collider = target.GetComponent<Rigidbody2D> ();	
-			if (target.gameObject.tag == "Object") {
-				BoxCollition bc = target.GetComponent<BoxCollition> ();
-				if (!bc.isOnALeftWall()) {
-					if (collider.isKinematic) {
-						collider.velocity = new Vector2 (-1, 0);
-					} else {
-						collider.isKinematic = true;
-						collider.velocity = new Vector2 (-1, 0);
-					}
-				}
-			}
-			once = false;
-			Destroy(gameObject);
-		}
+		collider.velocity = new Vector2(moveSpeedAplyed, 0);
 	}
 }
+

@@ -16,15 +16,28 @@ public class BoxCollition : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+	print( "box speed" + box.velocity + " BOOOL " + grounded);
 		if (other.gameObject.layer == 8) {
 			if (box.velocity.y < 0) {
 				grounded = true;
+				ceiling = false;
+				leftWall = false;
+				rightWall = false;
 			} else if (box.velocity.y > 0) {
 				ceiling = true;
-			} else if (box.velocity.x < 0) {
+				grounded = false;
+				leftWall = false;
+				rightWall = false;
+			} if (box.velocity.x < 0) {
 				leftWall = true;
+				ceiling = false;
+				grounded = false;
+				rightWall = false;
 			} else if (box.velocity.x > 0) {
 				rightWall = true;
+				ceiling = false;
+				grounded = false;
+				leftWall = false;
 			}
 			if (box.isKinematic) {
 				box.velocity = new Vector2 (0, 0);
@@ -41,7 +54,7 @@ public class BoxCollition : MonoBehaviour {
 				ceiling = false;
 			} else if (box.velocity.y > 0) {
 				grounded = false;
-			} else if (box.velocity.x < 0) {
+			}  if (box.velocity.x < 0) {
 				rightWall = false;
 			} else if (box.velocity.x > 0) {
 				leftWall = false;
@@ -70,7 +83,8 @@ public class BoxCollition : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		
 	}
 }

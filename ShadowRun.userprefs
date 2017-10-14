@@ -1,11 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BoxCollition.cs">
     <Files>
-      <File FileName="Assets\Scripts\CharacterMovement.cs" Line="74" Column="4" />
+      <File FileName="Assets\Scripts\CharacterMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DestroyBullet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BulletController.cs" Line="8" Column="2" />
-      <File FileName="Assets\Scripts\GravityGunHit.cs" Line="42" Column="5" />
+      <File FileName="Assets\Scripts\BulletHit.cs" Line="56" Column="4" />
+      <File FileName="Assets\Scripts\HorizontalGunLeftHit.cs" Line="18" Column="2" />
+      <File FileName="Assets\Scripts\HorizontalRightGun.cs" Line="18" Column="50" />
+      <File FileName="Assets\Scripts\VerticalUpGunHit.cs" Line="20" Column="53" />
+      <File FileName="Assets\Scripts\VerticalDownGunHit.cs" Line="16" Column="11" />
+      <File FileName="Assets\Scripts\GravityGunHit.cs" Line="13" Column="30" />
+      <File FileName="Assets\Scripts\GravityOnHit.cs" Line="23" Column="62" />
+      <File FileName="Assets\Scripts\BoxCollition.cs" Line="30" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
