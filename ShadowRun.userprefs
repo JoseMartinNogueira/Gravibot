@@ -1,17 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\VerticalUpGunHit.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LevelManager.cs">
     <Files>
       <File FileName="Assets\Scripts\CharacterMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DestroyBullet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BulletHit.cs" Line="23" Column="3" />
-      <File FileName="Assets\Scripts\HorizontalGunLeftHit.cs" Line="26" Column="18" />
-      <File FileName="Assets\Scripts\HorizontalRightGun.cs" Line="24" Column="39" />
-      <File FileName="Assets\Scripts\VerticalUpGunHit.cs" Line="26" Column="39" />
-      <File FileName="Assets\Scripts\VerticalDownGunHit.cs" Line="25" Column="58" />
-      <File FileName="Assets\Scripts\GravityGunHit.cs" Line="13" Column="33" />
-      <File FileName="Assets\Scripts\GravityOnHit.cs" Line="22" Column="2" />
-      <File FileName="Assets\Scripts\BoxCollition.cs" Line="18" Column="3" />
+      <File FileName="Assets\Scripts\BulletHit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\HorizontalGunLeftHit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\HorizontalRightGun.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\VerticalUpGunHit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\VerticalDownGunHit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GravityGunHit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GravityOnHit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BoxCollition.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LevelManager.cs" Line="19" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
