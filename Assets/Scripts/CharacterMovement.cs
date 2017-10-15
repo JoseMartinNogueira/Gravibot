@@ -161,7 +161,7 @@ public class CharacterMovement : MonoBehaviour {
 			if (facingRight) {
 				Instantiate (ammu, gunTip.position + rightShootingCorrection, Quaternion.Euler (new Vector3 (0, 0, 0)));
 			} else {
-				Instantiate (ammu, gunTip.position-leftShootingCorrection, Quaternion.Euler (new Vector3 (0, 0, 180f)));
+				Instantiate (ammu, gunTip.position, Quaternion.Euler (new Vector3 (0, 0, 180f)));
 			}
 		}
 	}

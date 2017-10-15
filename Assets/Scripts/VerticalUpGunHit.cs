@@ -19,4 +19,10 @@ public class VerticalUpGunHit : BulletHit {
 	{
 		collider.velocity = new Vector2(0, moveSpeedAplyed);
 	}
+	public override void changeDirection (Rigidbody2D bullet)
+	{
+		Quaternion euler = bullet.gameObject.transform.rotation;
+		euler.z = 90f;
+		bullet.gameObject.transform.rotation = euler;
+	}
 }

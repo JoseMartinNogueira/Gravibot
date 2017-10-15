@@ -26,9 +26,9 @@ GameObject:
   - component: {fileID: 114089683437536760}
   - component: {fileID: 114628561387338044}
   - component: {fileID: 114370701818234548}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HorizontalRightGun
-  m_TagString: Bullet
+  m_TagString: RBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,6 @@ MonoBehaviour:
   bulletController: {fileID: 0}
   once: 0
   target: {fileID: 0}
-  bulletHit: 0
   moveSpeedAplyed: 1
 --- !u!212 &212465488913166748
 SpriteRenderer:

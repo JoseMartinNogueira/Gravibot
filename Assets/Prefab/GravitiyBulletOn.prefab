@@ -26,9 +26,9 @@ GameObject:
   - component: {fileID: 114398279780168218}
   - component: {fileID: 114502732449619098}
   - component: {fileID: 114418746961945240}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GravitiyBulletOn
-  m_TagString: Bullet
+  m_TagString: GOnBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2174f06d6804f41bf7188c73a1ee4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletController: {fileID: 0}
+  once: 0
+  target: {fileID: 0}
 --- !u!114 &114502732449619098
 MonoBehaviour:
   m_ObjectHideFlags: 1

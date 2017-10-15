@@ -16,7 +16,6 @@ public class BoxCollition : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-	print( "box speed" + box.velocity + " BOOOL " + grounded);
 		if (other.gameObject.layer == 8) {
 			if (box.velocity.y < 0) {
 				grounded = true;

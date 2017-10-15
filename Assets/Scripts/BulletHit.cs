@@ -7,21 +7,22 @@ public abstract class  BulletHit : MonoBehaviour {
 	public BulletController bulletController;
 	public bool once;
 	public Collider2D target;
-	public bool bulletHit;
+	static int bulletsLayer = 10;
 
 	void Awake () 
 	{
-		bulletHit = false;
 		bulletController = GetComponent<BulletController>();
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.gameObject.tag != "Player" || (other.gameObject.tag == "Bullet" && !bulletHit)) {
+		if (other.gameObject.tag != "Player" ) {
 			once = true;
 			target = other;
-			if (other.gameObject.tag == "Bullet") {
-				bulletHit = true;
+			if (other.gameObject.layer == 10) {
+				Rigidbody2D thisBullet = other.GetComponent<Rigidbody2D>();
+				specificMovement( thisBullet );
+				changeDirection( thisBullet );
 			}
 		}
 	}
@@ -42,7 +43,6 @@ public abstract class  BulletHit : MonoBehaviour {
 
 	public void movementBullets ()
 	{
-		bulletController.removeForce ();
 		Rigidbody2D collider = target.GetComponent<Rigidbody2D> ();	
 		if (target.gameObject.tag == "Object") {
 			BoxCollition bc = target.GetComponent<BoxCollition> ();
@@ -52,15 +52,15 @@ public abstract class  BulletHit : MonoBehaviour {
 				}
 				specificMovement (collider);
 			}
-		} else if (target.gameObject.tag == "Bullet") {
-			
-		}
+		} 
 		once = false;
-		if (target.gameObject.tag != "Bullet") {
+		if (target.gameObject.layer != bulletsLayer) {
 			Destroy(gameObject);
 		}
 	}
 	public abstract void specificMovement( Rigidbody2D collider );
 
 	public abstract bool allawedMove( BoxCollition bc );
+
+	public abstract void changeDirection( Rigidbody2D bullet );
 }

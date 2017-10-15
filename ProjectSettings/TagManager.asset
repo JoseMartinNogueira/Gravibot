@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Object
   - Bullet
+  - GOffBullet
+  - GOnBullet
+  - LBullet
+  - RBullet
+  - UBullet
+  - DBullet
   layers:
   - Default
   - TransparentFX
@@ -17,7 +23,7 @@ TagManager:
   - 
   - Ground
   - GravityGunLayer
-  - 
+  - BulletsLayer
   - 
   - 
   - 

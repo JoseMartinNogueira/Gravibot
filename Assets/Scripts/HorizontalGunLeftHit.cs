@@ -19,5 +19,12 @@ public class HorizontalGunLeftHit : BulletHit {
 	{
 		collider.velocity = new Vector2(moveSpeedAplyed, 0);
 	}
+
+	public override void changeDirection (Rigidbody2D bullet)
+	{
+		Quaternion euler = bullet.gameObject.transform.rotation;
+		euler.z = 180f;
+		bullet.gameObject.transform.rotation = euler;
+	}
 }
 

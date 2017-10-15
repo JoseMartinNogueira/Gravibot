@@ -26,9 +26,9 @@ GameObject:
   - component: {fileID: 114774041280054142}
   - component: {fileID: 114673362454867876}
   - component: {fileID: 95478962039793858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HorizontalBulletLeft
-  m_TagString: Bullet
+  m_TagString: LBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,6 @@ MonoBehaviour:
   bulletController: {fileID: 0}
   once: 0
   target: {fileID: 0}
-  bulletHit: 0
   moveSpeedAplyed: -1
 --- !u!114 &114673362454867876
 MonoBehaviour:

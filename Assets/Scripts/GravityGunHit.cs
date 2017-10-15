@@ -6,14 +6,14 @@ public class GravityGunHit : BulletHit {
 
 	public override void hitManager ()
 	{
-		bulletController.removeForce ();
+		//bulletController.removeForce ();
 		Rigidbody2D collider = target.GetComponent<Rigidbody2D> ();
 		if (target.gameObject.tag == "Object" || target.gameObject.tag == "Bullet" ) {
 			collider.isKinematic = true;
 			specificMovement( collider );
 		}
 		once = false;
-		if (target.gameObject.tag != "Bullet") {
+		if (target.gameObject.layer != 10) {
 			Destroy(gameObject);
 		}
 	}
@@ -24,6 +24,11 @@ public class GravityGunHit : BulletHit {
 	public override void specificMovement (Rigidbody2D collider )
 	{
 		collider.velocity = new Vector2 (0, 0);
+	}
+
+	public override void changeDirection (Rigidbody2D bullet)
+	{
+		bullet.gameObject.transform.localRotation = bullet.gameObject.transform.localRotation;
 	}
 }
 

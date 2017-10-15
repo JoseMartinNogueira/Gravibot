@@ -26,9 +26,9 @@ GameObject:
   - component: {fileID: 114452370601990942}
   - component: {fileID: 114819753756034508}
   - component: {fileID: 114716723506321636}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VerticalBulletDown
-  m_TagString: Bullet
+  m_TagString: DBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,6 @@ MonoBehaviour:
   bulletController: {fileID: 0}
   once: 0
   target: {fileID: 0}
-  bulletHit: 0
   moveSpeedAplyed: -1
 --- !u!114 &114716723506321636
 MonoBehaviour:
