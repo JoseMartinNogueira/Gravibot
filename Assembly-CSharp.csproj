@@ -51,16 +51,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\LevelManager.cs" />
      <Compile Include="Assets\Scripts\BoxCollition.cs" />
      <Compile Include="Assets\Scripts\BulletController.cs" />
      <Compile Include="Assets\Scripts\BulletHit.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\DestroyBullet.cs" />
+     <Compile Include="Assets\Scripts\ExitManager.cs" />
      <Compile Include="Assets\Scripts\GravityGunHit.cs" />
      <Compile Include="Assets\Scripts\GravityOnHit.cs" />
      <Compile Include="Assets\Scripts\HorizontalGunLeftHit.cs" />
      <Compile Include="Assets\Scripts\HorizontalRightGun.cs" />
+     <Compile Include="Assets\Scripts\LevelCollectionManager.cs" />
+     <Compile Include="Assets\Scripts\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\SpikesController.cs" />
      <Compile Include="Assets\Scripts\VerticalDownGunHit.cs" />
      <Compile Include="Assets\Scripts\VerticalUpGunHit.cs" />
  <Reference Include="UnityEngine.UI">

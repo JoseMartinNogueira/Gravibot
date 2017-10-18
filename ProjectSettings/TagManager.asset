@@ -12,6 +12,8 @@ TagManager:
   - RBullet
   - UBullet
   - DBullet
+  - Spikes
+  - Switch
   layers:
   - Default
   - TransparentFX

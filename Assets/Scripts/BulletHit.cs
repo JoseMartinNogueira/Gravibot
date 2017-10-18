@@ -8,6 +8,7 @@ public abstract class  BulletHit : MonoBehaviour {
 	public bool once;
 	public Collider2D target;
 	static int bulletsLayer = 10;
+	public float bulletSpeed;
 
 	void Awake () 
 	{
@@ -16,7 +17,7 @@ public abstract class  BulletHit : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.gameObject.tag != "Player" ) {
+		if (other.gameObject.tag != "Player" && other.gameObject.tag != "Switch" && other.gameObject.tag != "Spikes") {
 			once = true;
 			target = other;
 			if (other.gameObject.layer == 10) {
@@ -63,4 +64,5 @@ public abstract class  BulletHit : MonoBehaviour {
 	public abstract bool allawedMove( BoxCollition bc );
 
 	public abstract void changeDirection( Rigidbody2D bullet );
+
 }
